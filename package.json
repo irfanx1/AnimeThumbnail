@@ -1,0 +1,13 @@
+{
+  "name": "anime-thumbnail-generator",
+  "version": "1.0.0",
+  "description": "Premium 16:9 Anime Thumbnail Generator matching custom layouts",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
