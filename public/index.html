@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Thumbnail Generator - Premium Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- html2canvas CDN for image generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-symbol">✦</span>
+        <h1>ANI<span class="highlight">SPARK</span></h1>
+      </div>
+      <p class="subtitle">Premium Anime Thumbnail Generator</p>
+    </header>
+
+    <div class="main-layout">
+      <!-- Left Panel: Controls & Customization -->
+      <aside class="control-panel">
+        
+        <!-- Template Selection Section -->
+        <section class="panel-section">
+          <h2><span class="icon">🎨</span> Layout Template</h2>
+          <div class="template-selector">
+            <button type="button" class="btn-template active" data-template="1">Modern Cinematic</button>
+            <button type="button" class="btn-template" data-template="2">Classic Split</button>
+            <button type="button" class="btn-template" data-template="3">Manga Edge</button>
+          </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="panel-section">
+          <h2><span class="icon">🔍</span> Search Anime</h2>
+          <div class="search-box">
+            <input type="text" id="search-input" placeholder="Type anime name (e.g. Rent a Girlfriend)...">
+            <button id="search-btn">Search</button>
+          </div>
+          <!-- Search Results Dropdown -->
+          <div id="search-results" class="search-results-list hidden"></div>
+        </section>
+
+        <!-- Customization Form -->
+        <form id="editor-form" onsubmit="event.preventDefault();">
+          
+          <!-- General settings -->
+          <section class="panel-section t1-only">
+            <h3>General Settings</h3>
+            <div class="form-group">
+              <label for="input-top-tag">Top Accent Tag</label>
+              <input type="text" id="input-top-tag" value="♦ ANIWEEKEND">
+            </div>
+          </section>
+
+          <!-- Title settings -->
+          <section class="panel-section">
+            <h3>Title & Typography</h3>
+            <div class="form-group">
+              <label for="input-title">Title</label>
+              <input type="text" id="input-title" value="SOLO LEVELING">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="input-title-size">Font Size (rem)</label>
+                <input type="number" id="input-title-size" min="1" max="5" step="0.1" value="2.8">
+              </div>
+              <div class="form-group">
+                <label for="input-title-color">Text Color</label>
+                <input type="color" id="input-title-color" value="#ffffff">
+              </div>
+            </div>
+          </section>
+
+          <!-- Genres settings -->
+          <section class="panel-section">
+            <h3>Genres</h3>
+            <div class="form-group">
+              <label for="input-genres">Genres (Comma separated)</label>
+              <input type="text" id="input-genres" value="ACTION, ADVENTURE, FANTASY">
+            </div>
+            <div class="form-group">
+              <label>Genre Tag Styling</label>
+              <div class="tag-style-presets">
+                <button type="button" class="btn-preset active" data-style="colorful">Colorful Borders</button>
+                <button type="button" class="btn-preset" data-style="white">All White</button>
+                <button type="button" class="btn-preset" data-style="accent">Theme Accent</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Description settings -->
+          <section class="panel-section">
+            <h3>Description (Synopsis)</h3>
+            <div class="form-group">
+              <label for="input-description">Synopsis text</label>
+              <textarea id="input-description" rows="4">In a world where hunters must battle deadly monsters to protect mankind, Sung Jinwoo, the weakest hunter of all mankind, finds himself in a struggle for survival in a double dungeon...</textarea>
+            </div>
+          </section>
+
+          <!-- Stats settings -->
+          <section class="panel-section">
+            <h3>Anime Statistics</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="input-studio">Studio</label>
+                <input type="text" id="input-studio" value="A-1 PICTURES">
+              </div>
+              <div class="form-group">
+                <label for="input-episodes">Episodes/Runtime</label>
+                <input type="text" id="input-episodes" value="12">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="input-released">Released</label>
+                <input type="text" id="input-released" value="2024">
+              </div>
+              <div class="form-group">
+                <label for="input-format">Format</label>
+                <input type="text" id="input-format" value="TV">
+              </div>
+              <div class="form-group">
+                <label for="input-score">Score</label>
+                <input type="text" id="input-score" value="87%">
+              </div>
+            </div>
+          </section>
+
+          <!-- Background & Poster settings -->
+          <section class="panel-section">
+            <h3>Aesthetics & Visuals</h3>
+            
+            <div class="form-group t1-only">
+              <label>Poster Image Source</label>
+              <div class="image-source-options">
+                <input type="file" id="upload-poster" accept="image/*" class="file-input">
+                <label for="upload-poster" class="btn-file-upload">Upload Custom Poster</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Landscape Background Source (Template 2 / Shared)</label>
+              <div class="image-source-options">
+                <input type="file" id="upload-background" accept="image/*" class="file-input">
+                <label for="upload-background" class="btn-file-upload">Upload Custom Background</label>
+              </div>
+            </div>
+
+            <!-- Sliders (Template 1 Only) -->
+            <div class="form-row t1-only">
+              <div class="form-group">
+                <label for="input-bg-blur">Background Blur (px)</label>
+                <input type="range" id="input-bg-blur" min="0" max="40" value="0">
+              </div>
+              <div class="form-group">
+                <label for="input-bg-darkness">Darkness Overlay</label>
+                <input type="range" id="input-bg-darkness" min="0" max="90" value="45">
+              </div>
+            </div>
+
+            <!-- Background Positioning (Shared) -->
+            <div class="form-group">
+              <label for="input-bg-position">Background Crop Alignment</label>
+              <select id="input-bg-position">
+                <option value="center">Center</option>
+                <option value="right" selected>Right (Recommended for Template 2)</option>
+                <option value="left">Left</option>
+              </select>
+            </div>
+
+            <div class="form-group t1-only">
+              <label class="checkbox-label">
+                <input type="checkbox" id="input-show-accents" checked>
+                Show Poster Corner Accents
+              </label>
+            </div>
+
+            <!-- Template 2 Specific: Recommendations Uploads -->
+            <div class="t2-only" style="margin-top: 15px;">
+              <div class="form-group">
+                <label>Recommendation Card Previews</label>
+                <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">
+                  These fetch automatically from MAL. You can also upload custom images:
+                </div>
+                <div class="rec-uploads-row" style="display:flex; gap:8px;">
+                  <div style="flex:1;">
+                    <input type="file" id="upload-rec-1" accept="image/*" class="file-input">
+                    <label for="upload-rec-1" class="btn-file-upload" style="padding: 8px 4px; font-size: 0.78rem; text-align:center;">Card 1</label>
+                  </div>
+                  <div style="flex:1;">
+                    <input type="file" id="upload-rec-2" accept="image/*" class="file-input">
+                    <label for="upload-rec-2" class="btn-file-upload" style="padding: 8px 4px; font-size: 0.78rem; text-align:center;">Card 2</label>
+                  </div>
+                  <div style="flex:1;">
+                    <input type="file" id="upload-rec-3" accept="image/*" class="file-input">
+                    <label for="upload-rec-3" class="btn-file-upload" style="padding: 8px 4px; font-size: 0.78rem; text-align:center;">Card 3</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group" style="margin-top: 15px;">
+                <label for="input-bottom-btn-text">Bottom Button Text</label>
+                <input type="text" id="input-bottom-btn-text" value="FIND MORE ANIME LIKE THIS">
+              </div>
+            </div>
+
+            <!-- Template 3 Specific: Typography & Overlays -->
+            <div class="t3-only" style="margin-top: 15px;">
+              <div class="form-group">
+                <label for="input-t3-vertical-japanese">Left Border Vertical Japanese Text</label>
+                <input type="text" id="input-t3-vertical-japanese" value="阿賀沢 紅茶 [こおりのじょうへき]">
+              </div>
+              <div class="form-group">
+                <label for="input-t3-vertical-blue">Left Blue Large Japanese Text</label>
+                <input type="text" id="input-t3-vertical-blue" value="氷の城壁">
+              </div>
+              <div class="form-group">
+                <label for="input-t3-vertical-english">Left Vertical English Accent</label>
+                <input type="text" id="input-t3-vertical-english" value="THE RAMPART OF ICE">
+              </div>
+              <div class="form-group">
+                <label for="input-t3-tagline">Header Tagline</label>
+                <input type="text" id="input-t3-tagline" value="YOUR EDGE FOR THE LATEST MANGA UPDATES!">
+              </div>
+            </div>
+
+          </section>
+        </form>
+      </aside>
+
+      <!-- Right Panel: Live Preview & Exports -->
+      <main class="preview-area">
+        <div class="preview-card-wrapper">
+          <div class="preview-header">
+            <h3>Live Thumbnail Preview</h3>
+            <span class="badge-ratio">16:9 Aspect Ratio</span>
+          </div>
+
+          <!-- THE THUMBNAIL CANVAS/CARD -->
+          <div class="thumbnail-export-container">
+            <div id="thumbnail-preview" class="thumbnail-card template-1">
+              <!-- Background Layer -->
+              <div id="thumb-bg" class="thumbnail-bg"></div>
+              
+              <!-- Template 2: Splatter Left Column Banner Background -->
+              <div class="t2-banner-overlay t2-only">
+                <div class="splatter-edge-container">
+                  <svg class="splatter-edge" viewBox="0 0 200 720" preserveAspectRatio="none">
+                    <path d="M 0 0 L 150 0 C 140 25, 165 50, 148 80 C 135 110, 170 140, 150 170 C 130 200, 168 230, 148 260 C 135 290, 172 320, 155 350 C 138 380, 168 410, 148 440 C 130 470, 165 500, 148 530 C 135 560, 172 590, 155 620 C 138 650, 168 680, 155 720 L 0 720 Z" fill="currentColor"></path>
+                    <circle cx="170" cy="55" r="6" fill="currentColor"></circle>
+                    <circle cx="158" cy="130" r="4" fill="currentColor"></circle>
+                    <circle cx="175" cy="210" r="5.5" fill="currentColor"></circle>
+                    <circle cx="160" cy="310" r="4.5" fill="currentColor"></circle>
+                    <circle cx="178" cy="390" r="7" fill="currentColor"></circle>
+                    <circle cx="162" cy="475" r="4" fill="currentColor"></circle>
+                    <circle cx="172" cy="555" r="6" fill="currentColor"></circle>
+                    <circle cx="158" cy="640" r="4.5" fill="currentColor"></circle>
+                    <circle cx="180" cy="150" r="3" fill="currentColor"></circle>
+                    <circle cx="165" cy="500" r="3" fill="currentColor"></circle>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Content Grid -->
+              <div class="thumbnail-content">
+                <!-- Left Details Column -->
+                <div class="content-left">
+                  <!-- Template 3: Vertical Art/Typography Left Side Overlay -->
+                  <div id="thumb-t3-vertical-japanese" class="t3-vertical-logo t3-only">阿賀沢 紅茶 [こおりのじょうへき]</div>
+                  <div id="thumb-t3-vertical-english" class="t3-vertical-accent-text t3-only">THE RAMPART OF ICE</div>
+                  <div id="thumb-t3-vertical-blue" class="t3-title-blue-accent t3-only">氷の城壁</div>
+                  
+                  <div class="t3-left-synopsis-box t3-only">
+                    <p id="thumb-desc-left-t3" class="t3-left-synopsis-text">Inept at dealing with people, Hikawa Koyuki maintains a wall between herself and others...</p>
+                    <div class="t3-left-brand-row">
+                      <div class="t3-left-brand">MANGA <span>EDGE</span></div>
+                      <div class="t3-left-dots"><span class="active"></span><span></span><span></span></div>
+                    </div>
+                  </div>
+
+                  <!-- Template 2 Header -->
+                  <div class="t2-header t2-only">
+                    <div class="t2-top-tag">
+                      <span class="search-symbol">🔍</span> ANIME UNION
+                    </div>
+                    <div class="t2-nav">
+                      <span class="nav-link active">ANIME</span>
+                      <span class="nav-link">MANGA</span>
+                      <span class="nav-link">MOVIES</span>
+                    </div>
+                  </div>
+
+                  <!-- Template 1 Top Tag -->
+                  <div id="thumb-top-tag" class="thumb-top-tag t1-only">♦ ANIWEEKEND</div>
+                  
+                  <!-- Title & Description Container -->
+                  <div class="title-desc-wrapper">
+                    <h2 id="thumb-title" class="thumb-title">SOLO LEVELING</h2>
+                    
+                    <!-- Genres Row in Template 1 -->
+                    <div id="thumb-genres" class="thumb-genres t1-only">
+                    </div>
+                    
+                    <div class="thumb-synopsis-container">
+                      <p id="thumb-description" class="thumb-description">
+                        In a world where hunters must battle deadly monsters to protect mankind, Sung Jinwoo, the weakest hunter of all mankind, finds himself in a struggle for survival in a double dungeon...
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <!-- Template 2 Genres Row -->
+                  <div id="thumb-genres-t2" class="thumb-genres t2-only">
+                  </div>
+                  
+                  <!-- Template 2 Recommendations Row -->
+                  <div class="t2-recs-container t2-only">
+                    <div class="rec-card"><img id="thumb-rec-1" src="" alt="Rec 1"></div>
+                    <div class="rec-card"><img id="thumb-rec-2" src="" alt="Rec 2"></div>
+                    <div class="rec-card"><img id="thumb-rec-3" src="" alt="Rec 3"></div>
+                  </div>
+                  
+                  <!-- T2 separator line -->
+                  <div class="t2-separator t2-only"></div>
+                  
+                  <!-- Template 2 Bottom Search Pill -->
+                  <div class="t2-bottom-badge t2-only">
+                    <span class="search-symbol">🔍</span> <span id="thumb-bottom-btn-text">FIND MORE ANIME LIKE THIS</span>
+                  </div>
+
+                  <!-- Template 1 Stats Grid -->
+                  <div class="thumb-stats-grid t1-only">
+                    <div class="stat-col">
+                      <span class="stat-label">STUDIO</span>
+                      <span id="thumb-stat-studio" class="stat-val">A-1 PICTURES</span>
+                    </div>
+                    <div class="stat-col">
+                      <span class="stat-label">EPISODES/RUNTIME</span>
+                      <span id="thumb-stat-episodes" class="stat-val">12</span>
+                    </div>
+                    <div class="stat-col">
+                      <span class="stat-label">RELEASED</span>
+                      <span id="thumb-stat-released" class="stat-val">2024</span>
+                    </div>
+                    <div class="stat-col">
+                      <span class="stat-label">FORMAT</span>
+                      <span id="thumb-stat-format" class="stat-val">TV</span>
+                    </div>
+                    <div class="stat-col">
+                      <span class="stat-label">SCORE</span>
+                      <span id="thumb-stat-score" class="stat-val">87%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Template 3: Manga Edge Right Panel Content (Grid Column 2) -->
+                <div class="t3-right-panel t3-only">
+                  <div class="t3-header">
+                    <div class="t3-brand">MANGA<br>EDGE 🌐</div>
+                    <div id="thumb-t3-tagline" class="t3-tagline">YOUR EDGE FOR THE LATEST MANGA UPDATES!</div>
+                    <div class="t3-hamburger">☰</div>
+                  </div>
+                  <h2 id="thumb-title-t3" class="t3-title">THE RAMPARTS OF ICE.</h2>
+                  
+                  <div class="t3-line"></div>
+                  
+                  <p id="thumb-desc-t3" class="t3-description">Synopsis text goes here...</p>
+                  
+                  <div class="t3-line"></div>
+                  
+                  <div class="t3-actions">
+                    <div class="t3-read-btn"><span class="t3-read-label">READ</span> <span class="t3-now-label">NOW</span></div>
+                    <div class="t3-bookmark">🔖</div>
+                  </div>
+                  
+                  <div class="t3-line"></div>
+                  
+                  <div class="t3-carousel-dots">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                  </div>
+                  <div class="t3-carousel">
+                    <div class="t3-carousel-card"><img id="thumb-rec-t3-1" src="" alt="Rec 1"></div>
+                    <div class="t3-carousel-card"><img id="thumb-rec-t3-2" src="" alt="Rec 2"></div>
+                    <div class="t3-carousel-card"><img id="thumb-rec-t3-3" src="" alt="Rec 3"></div>
+                  </div>
+                </div>                
+                <!-- Right Column Poster (Template 1 only) -->
+                <div class="content-right t1-only">
+                  <div class="poster-container">
+                    <div class="poster-accent accent-tl"></div>
+                    <div class="poster-accent accent-br"></div>
+                    <img id="thumb-poster" src="" alt="Anime Poster">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download Action Panel -->
+          <div class="action-panel">
+            <div class="export-options">
+              <label for="export-scale">Export Resolution:</label>
+              <select id="export-scale">
+                <option value="1">Standard Quality (1280 x 720)</option>
+                <option value="2" selected>Ultra High Quality (2560 x 1440 - 2x Scale)</option>
+                <option value="3">Maximum Quality (3840 x 2160 - 3x Scale)</option>
+              </select>
+            </div>
+            
+            <button id="download-btn" class="btn-download">
+              <span class="btn-icon">💾</span> Download Thumbnail (PNG)
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
