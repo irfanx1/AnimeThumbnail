@@ -1,126 +1,131 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:e94560&height=220&section=header&text=RAGE%20BOTS&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=42&desc=Simple%20to%20run.%20Built%20to%20last.&descAlignY=62&descSize=17&descColor=cbd5e1" width="100%"/>
-</div>
 
-<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:8B0000,100:FF0000&height=280&section=header&text=RAGE%20BOTS&fontSize=85&fontColor=FFFFFF&animation=fadeIn&fontAlignY=40&desc=Code%20with%20attitude.&descAlignY=58&descSize=20&descColor=FF4D4D" width="100%"/>
 
-[![Status](https://img.shields.io/badge/status-active-22c55e?style=flat-square)](#)
-[![Version](https://img.shields.io/badge/version-1.0.0-e94560?style=flat-square)](#)
-[![License](https://img.shields.io/badge/license-MIT-3b82f6?style=flat-square)](#)
-[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-6366f1?style=flat-square)](#)
+<br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=24&duration=2800&pause=900&color=FF0000&center=true&vCenter=true&width=620&lines=Building+bots+that+don%27t+quit;Automation+%7C+Discord+%7C+Backend;Powered+by+caffeine+and+spite" alt="typing" />
 
 </div>
 
 <br/>
 
-## About
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
 
-> One paragraph — what this bot does, who it's for, and the one reason to pick it over alternatives.
+### `whoami`
 
-Replace this with a clear, honest description. No fluff, no buzzwords — just what it actually does.
+```yaml
+name: Your Name
+role: Bot Developer
+focus: Automation / Backend Systems
+based_in: Earth
+status: probably debugging something
+```
+
+I build bots that are fast, stable, and don't fall over the moment traffic spikes. No fluff — just code that works.
+
+</td>
+<td width="50%" valign="top">
+
+### `stack`
+
+<p>
+<img src="https://img.shields.io/badge/JavaScript-000000?style=for-the-badge&logo=javascript&logoColor=FF0000"/>
+<img src="https://img.shields.io/badge/Node.js-000000?style=for-the-badge&logo=node.js&logoColor=FF0000"/>
+<img src="https://img.shields.io/badge/Python-000000?style=for-the-badge&logo=python&logoColor=FF0000"/>
+<img src="https://img.shields.io/badge/Docker-000000?style=for-the-badge&logo=docker&logoColor=FF0000"/>
+<img src="https://img.shields.io/badge/Git-000000?style=for-the-badge&logo=git&logoColor=FF0000"/>
+<img src="https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=FF0000"/>
+</p>
+
+</td>
+</tr>
+</table>
 
 <br/>
 
-## Features
-
-- **Fast** — minimal overhead, instant response time
-- **Stable** — auto-reconnect, full error handling
-- **Modular** — commands are self-contained, easy to extend
-- **Logged** — every action traceable for quick debugging
-
-> Replace with the real feature list for this bot.
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0&height=2&section=header" width="100%"/>
+</div>
 
 <br/>
-
-## Tech Stack
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=nodejs,js,docker,git&theme=dark" />
+### Pinned Builds
+
+</div>
+
+<table width="100%">
+<tr>
+<td width="50%">
+
+<div align="center">
+
+**🔴 [Project Name](https://github.com/USERNAME/repo)**
+
+A one-line gut-punch description of what this bot does and why it's worth a star.
+
+`Node.js` `Discord.js` `Docker`
+
+</div>
+
+</td>
+<td width="50%">
+
+<div align="center">
+
+**🔴 [Project Name](https://github.com/USERNAME/repo)**
+
+A one-line gut-punch description of what this bot does and why it's worth a star.
+
+`Python` `Telegram` `PostgreSQL`
+
+</div>
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0&height=2&section=header" width="100%"/>
+</div>
+
+<br/>
+
+<div align="center">
+
+### Activity
+
+<img src="https://github-readme-stats.vercel.app/api?username=USERNAME&show_icons=true&theme=red&hide_border=true&bg_color=0D0D0D&title_color=FF0000&icon_color=FF0000&text_color=FFFFFF" height="165"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=USERNAME&theme=dark&hide_border=true&background=0D0D0D&ring=FF0000&fire=FF0000&currStreakLabel=FF0000" height="165"/>
+
+<br/>
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=USERNAME&theme=react-dark&hide_border=true&bg_color=0D0D0D&color=FF0000&line=FF0000&point=FFFFFF" width="100%"/>
 
 </div>
 
 <br/>
 
-## Installation
-
-```bash
-git clone https://github.com/yourusername/rage-bots.git
-cd rage-bots
-npm install
-cp .env.example .env
-npm start
-```
-
-<details>
-<summary>Run with Docker</summary>
-
-<br/>
-
-```bash
-docker build -t rage-bots .
-docker run -d --env-file .env --name rage-bots rage-bots
-```
-
-</details>
-
-<br/>
-
-## Configuration
-
-```env
-BOT_TOKEN=your_token_here
-PREFIX=!
-OWNER_ID=your_id_here
-```
-
-| Variable | Required | Description |
-|---|---|---|
-| `BOT_TOKEN` | Yes | Authentication token |
-| `PREFIX` | No | Command prefix — defaults to `!` |
-| `OWNER_ID` | Yes | Your ID for admin-only commands |
-
-<br/>
-
-## Usage
-
-```bash
-npm start      # run
-npm run dev    # run with hot-reload
-```
-
-| Command | Description |
-|---|---|
-| `!help` | Lists all commands |
-| `!ping` | Checks bot latency |
-| `!status` | Shows uptime and stats |
-
-<br/>
-
-## Roadmap
-
-- [x] Core functionality
-- [x] Error handling
-- [ ] Web dashboard
-- [ ] Plugin support
-
-<br/>
-
-## Contributing
-
-1. Fork the repo
-2. Create a branch — `git checkout -b feature/your-feature`
-3. Commit — `git commit -m "Add your feature"`
-4. Push and open a Pull Request
-
-<br/>
-
-## License
-
-MIT — see [LICENSE](./LICENSE) for details.
-
-<br/>
-
 <div align="center">
-  <sub>Built by <a href="https://github.com/yourusername">yourusername</a></sub>
+
+### Connect
+
+<a href="#"><img src="https://img.shields.io/badge/Discord-000000?style=for-the-badge&logo=discord&logoColor=FF0000"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Telegram-000000?style=for-the-badge&logo=telegram&logoColor=FF0000"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Email-000000?style=for-the-badge&logo=gmail&logoColor=FF0000"/></a>
+
+<br/><br/>
+
+<sub>Every repo here follows the same rule: <b>if it doesn't run, it doesn't ship.</b></sub>
+
+<br/><br/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF0000,50:8B0000,100:000000&height=120&section=footer" width="100%"/>
+
 </div>
